@@ -2,6 +2,7 @@ package collections;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -10,18 +11,18 @@ public class StudentMain {
 	public static void main(String[] args) {
 
 		StudentData stu1 = new StudentData("Gopi Chand", 25, 1234, 9288639761L);
-		StudentData stu2 = new StudentData("Gnaneshwar", 23, 1235, 9288639828L);
+		StudentData stu2 = new StudentData("Gnaneshwar", 23, 1239, 9288639828L);
 		StudentData stu3 = new StudentData("Lakshmi Reddy", 22, 1236, 9288639861L);
 		StudentData stu4 = new StudentData("Varun Teja", 24, 1237, 9642985343L);
 		StudentData stu5 = new StudentData("Tejaswini", 24, 1238, 9288639781L);
-		StudentData stu6 = new StudentData("Priyanka", 24, 1239, 9288697894L);
+		StudentData stu6 = new StudentData("Priyanka", 24, 1235, 9288697894L);
 		StudentData stu7 = new StudentData("Tejaswini", 25, 1240, 9288639762L);
 		StudentData stu8 = new StudentData("Gopi Chand", 25, 1234, 9288639761L);
 		StudentData stu9 = stu2;
 
 		try {  
 
-			TreeSet<StudentData> tsStu = new TreeSet<StudentData>();
+			TreeSet<StudentData> tsStu = new TreeSet<StudentData>(new StudentComparator());
 
 			tsStu.add(stu1);
 			tsStu.add(stu2);
@@ -99,11 +100,17 @@ public class StudentMain {
 		int stuId = sc.nextInt();
 
 		try {
-			for (StudentData stu : students) {
-				if (stuId == stu.getId()) {
-					System.out.println("Deleting student details with id: " + stuId);
-					students.remove(stu);
-				}
+			/*
+			 * for (StudentData stu : students) { if (stuId == stu.getId()) {
+			 * System.out.println("Deleting student details with id: " + stuId);
+			 * students.remove(stu); } }
+			 */
+	
+			Iterator<StudentData> alIterator = students.iterator();
+			
+			while(alIterator.hasNext()) {
+				if(alIterator.next().getId() == stuId)
+						alIterator.remove();
 			}
 
 			// Printing student details after deletion
